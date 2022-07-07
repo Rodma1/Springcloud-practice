@@ -1,10 +1,12 @@
 package com.chen.service.impl;
 
 import com.chen.dao.mapper.UserMapper;
+import com.chen.dao.pojo.Book;
 import com.chen.dao.pojo.User;
 import com.chen.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -19,8 +21,22 @@ public class UserServiceImpl implements UserService {
 
     @Autowired(required = false)
     private UserMapper userMapper;
+
+    @Autowired
+    private RestTemplate restTemplate;
     @Override
     public List<User> listUser() {
         return userMapper.selectList(null);
     }
+
+    @Override
+    public User OneUser(Long id) {
+        User user = userMapper.selectById(id);
+        String url = "http://127.0.0.1:8888/book/one/"+user.getBookId();
+        Book book = restTemplate.getForObject(url, Book.class);
+        user.setBook(book);
+        return user;
+    }
+
+
 }

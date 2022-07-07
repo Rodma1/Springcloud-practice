@@ -1,6 +1,9 @@
 package com.chen.dao.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+
+import java.beans.Transient;
 
 /**
  * @author: 那就叫小智吧
@@ -18,4 +21,6 @@ public class User {
     private Character gender;
 
     private Long bookId;
+    @TableField(exist = false)
+    private Book book;
 }

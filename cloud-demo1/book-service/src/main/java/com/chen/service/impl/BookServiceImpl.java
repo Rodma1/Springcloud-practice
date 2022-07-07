@@ -23,4 +23,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> listBook() {
         return bookMapper.selectList(null);
     }
+
+    @Override
+    public Book OneBook(Long id) {
+        return bookMapper.selectById(id);
+    }
 }

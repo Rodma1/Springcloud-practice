@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface BookService {
     List<Book> listBook();
+
+    Book OneBook(Long id);
 }
