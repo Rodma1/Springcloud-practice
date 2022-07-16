@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User OneUser(Long id) {
         User user = userMapper.selectById(id);
-        String url = "http://127.0.0.1:8888/book/one/"+user.getBookId();
+        String url = "http://bookservice/book/one/"+user.getBookId();
         Book book = restTemplate.getForObject(url, Book.class);
         user.setBook(book);
         return user;
